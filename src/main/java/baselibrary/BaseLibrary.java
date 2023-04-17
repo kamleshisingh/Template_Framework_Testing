@@ -17,6 +17,7 @@ public class BaseLibrary
 	@AfterTest
 	public void closeBrowser() 
 	{
-		driver.quit();
+		driver.quit();		// this will shut down the browser
+//		driver.close();		// this is for close the current tab in the browser
 	}
 }
