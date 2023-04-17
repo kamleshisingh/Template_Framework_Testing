@@ -2,6 +2,7 @@ package baselibrary;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
 
 public class BaseLibrary 
 {
@@ -13,5 +14,9 @@ public class BaseLibrary
 		driver.get(url);
 		driver.manage().window().maximize();
 	}
-
+	@AfterTest
+	public void closeBrowser() 
+	{
+		driver.quit();
+	}
 }
