@@ -31,7 +31,7 @@ public class BaseLibrary implements PropertyUtility
 		String value = "";
 		try 
 		{
-		Properties prop= new Properties();
+		Properties prop= new Properties();	//this will help us to get data from property file
 		prop.load(new FileInputStream(configPropLoc));
 		value = prop.getProperty(key);
 		} catch (Exception e) {
