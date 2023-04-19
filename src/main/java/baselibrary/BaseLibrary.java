@@ -1,15 +1,19 @@
 package baselibrary;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 
+import excelutitlities.ExcelUtilities;
 import propertyutility.PropertyUtility;
 
-public class BaseLibrary implements PropertyUtility
+public class BaseLibrary implements ExcelUtilities, PropertyUtility
 {
 	public static WebDriver driver;
 	String configPropLoc ="D:\\eclips\\Template_Framework_Testing\\src\\main\\test\\testdata\\config.properties";
@@ -36,6 +40,20 @@ public class BaseLibrary implements PropertyUtility
 		value = prop.getProperty(key);
 		} catch (Exception e) {
 		
+		}
+		return value;
+	}
+	@Override
+	public String excelSheetData(String path, int sheetNo, int rowNo, int cellNo)
+	{
+		String value ="";
+		try {
+			XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(path));
+			XSSFSheet sheet = wb.getSheetAt(sheetNo);
+			value = sheet.getRow(rowNo).getCell(cellNo).getStringCellValue();
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
 		}
 		return value;
 	}
